@@ -1,13 +1,18 @@
 // Flutter app (main.dart)
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 
 void main() {
-  runApp(const MyApp());
+  runApp(DevicePreview(
+    builder: (BuildContext context) {
+      return const MyApp();
+    },
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
