@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Make sure base href is correct -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Your app description">
+
+  <!-- Configure viewport for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title and icons -->
+  <title>Your App Name</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Flutter web initialization -->
+  <script>
+    // Serve Flutter web app from a subdirectory if needed
+    const serviceWorkerVersion = "1375642004";
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service worker for PWA support
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=1375642004');
+      });
+    }
+
+    window.addEventListener('load', function (ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <script src="flutter.js" defer></script>
+</body>
+
+</html>
